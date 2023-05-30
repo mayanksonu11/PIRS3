@@ -30,7 +30,7 @@ int main()
         u1.loc_y = rand()%env.breadth;
         // u1.slice_id = rand()%env.num_of_slice;
         // u1.rbs = 0; //rand()%275;
-        u1.req_rate_min = (rand()%100)/10.0;
+        u1.min_rate_req = (rand()%100)/10.0;
         // u1.req_rate_max = u1.req_rate_min + rand()%10;
         u1.latency = rand()%10;
         env.user_list.push_back(u1);
@@ -92,12 +92,12 @@ int main()
             }
         }
     }
-    display2d(adjacency);
+    // display2d(adjacency);
     // display_cluster(clusterification(env,users,rrhs));
     // We shall now find out SINR_DB for each user from each RRH
     vector<vector<double>> SINR_dB = find_SINR(env,env.user_list,env.rrh_list,UE2SBS_dist);
-    cout << "SINR_DB" << endl;
-    display2d(SINR_dB);
+    // cout << "SINR_DB" << endl;
+    // display2d(SINR_dB);
     for(int j=0;j<env.num_of_users;j++){
         int key=0; double max_sinr_db=0;
         for(int i=0;i<env.num_of_rrh;i++){
