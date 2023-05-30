@@ -16,7 +16,7 @@ int main()
     env.length=1000; 
     env.breadth=1000; 
     env.num_of_rrh=6;
-    env.num_of_users=1500;
+    env.num_of_users=15;
     env.num_of_slice=1;
 
     

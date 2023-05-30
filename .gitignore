@@ -1,2 +1,6 @@
 *.gch
 main
+pisr3
+pisr3a
+__pycache*
+.vscode*
