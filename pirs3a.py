@@ -109,6 +109,7 @@ def simulate (solution, weight_cost,max_weight,init_temp,steps):
             break
     return best_cost, best
 
+accepted_user = 0
 
 for i in range(num_of_bs):
     if i==0:
@@ -122,5 +123,8 @@ for i in range(num_of_bs):
     for idx in range(len(best_combination)):
         if best_combination[idx] == 1:
             print("User-Id:",idx," Number of RB:",weight_cost[idx][0]," Throughput:",weight_cost[idx][1])
-    print("Best throughput:",best_cost)
-    print("Best combination:",best_combination)
+            accepted_user += 1
+
+    print("Total User:",num_of_ue,"Num of Connected User:",accepted_user, "Churn Rate:",100.0*(1-accepted_user/num_of_ue))
+    print("Total throughput:",best_cost)
+    # print("Best combination:",best_combination)

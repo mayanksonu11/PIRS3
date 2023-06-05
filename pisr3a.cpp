@@ -15,8 +15,8 @@ int main()
 
     env.length=1000; 
     env.breadth=1000; 
-    env.num_of_rrh=6;
-    env.num_of_users=15;
+    env.num_of_rrh=1+10;
+    env.num_of_users=1500;
     env.num_of_slice=1;
 
     
@@ -123,7 +123,7 @@ int main()
     find_mse_sinr(SINR_BS);
     cout << "SINR_BS" << endl;
     display2d(SINR_BS);
-    cin >> wait_flag;
+    // cin >> wait_flag;
 
     vector<pair<int,double>> best_bs;
     
@@ -168,10 +168,14 @@ int main()
             // rij is number of resource block required by UE j from base station i : min_rate_req/rate_per_RB
             num_of_RB[i][ue.user_id] =  ceil(ue.min_rate_req/rate[i][ue.user_id]);
             achvble_thput[i][ue.user_id] = num_of_RB[i][ue.user_id]*rate[i][ue.user_id];
-            
-            if(achvble_thput[i][ue.user_id] > ue.min_rate_req && Q[i][ue.user_id]==false){
+            if(achvble_thput[i][ue.user_id] > ue.max_rate_req && Q[i][ue.user_id]==false){
                 Q[i][ue.user_id] = true;
-                f1 << "(" << num_of_RB[i][ue.user_id] << "," << achvble_thput[i][ue.user_id] << ")";
+                f1 << "(" << num_of_RB[i][ue.user_id] << "," << achvble_thput[i][ue.user_id] << "," << ue.max_rate_req << "," << ue.min_rate_req << ")";
+                eligible_users.push_back(ue);
+            }
+            else if(achvble_thput[i][ue.user_id] > ue.min_rate_req && Q[i][ue.user_id]==false){
+                Q[i][ue.user_id] = true;
+                f1 << "(" << num_of_RB[i][ue.user_id] << "," << achvble_thput[i][ue.user_id] << "," << ue.max_rate_req << "," << ue.min_rate_req << ")";
                 eligible_users.push_back(ue);
             }
             if(ue.user_id!=env.num_of_users-1){
@@ -181,7 +185,7 @@ int main()
         f1 << "]" <<endl;
         // cout << eligible_users.size() << endl;
         // cin >> wait_flag;
-        eligible_users.clear();
+        // eligible_users.clear();
 
     }
     f1 << "\treturn weight_cost\n";
